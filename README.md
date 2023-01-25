@@ -21,6 +21,10 @@ $ npm start
 mockサーバーも自動で立ち上がります。
 [http://localhost:3000](http://localhost:3000)
 
+### ログイン
+ユーザー名:`test`
+パスワード:`test`
+
 ### Mock Service Workerのコード生成
 ```shell
 $ npx msw init public/ --save
