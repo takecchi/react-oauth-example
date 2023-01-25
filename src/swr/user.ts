@@ -1,24 +1,14 @@
 import useSWR from 'swr';
-import { accessToken } from '../libs/cookie';
-import { fetchUserName } from '../libs/api';
-
-const fetcher = async () => {
-  if (accessToken.get() === '') {
-    throw new Error('アクセストークンがない');
-  }
-  const name = await fetchUserName();
-  console.debug(`アカウント名取得:${name}`);
-  return name;
-};
+import { fetchUser, UserResponse } from '../libs/api';
 
 export const useUser = () => {
-  const { data, mutate, error, isLoading } = useSWR<string | undefined, Error>(
-    '/api/profile',
-    fetcher
-  );
+  const { data, mutate, error, isLoading } = useSWR<
+    UserResponse | undefined,
+    Error
+  >('/api/profile', fetchUser);
 
   return {
-    name: data,
+    user: data,
     isLoading,
     mutate,
     error,
